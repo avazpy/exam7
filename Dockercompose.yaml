@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  exam_service:
+    image: exam_image
+    container_name: compose_exam_container
+    command: python3 manage.py runserver 8000
+    restart: always
+    ports:
+      - '8002:8002'
+
+  postgres_service:
+    image: postgres:alpine
+    #    container_name: compose_postgres_container
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_data_service:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=1
